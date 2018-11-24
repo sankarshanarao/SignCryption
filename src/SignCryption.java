@@ -139,4 +139,17 @@ public class SignCryption {
 		return fs;
 	}
 
+	public static BigInteger getGenerator(BigInteger primeNumber) {
+		if (isPrime(primeNumber)==false)
+			return -1;
+
+		BigInteger phi = primeNumber-1;
+
+		LinkedList primeFactors = rhoFactors(phi);
+		/*Still Working on it*/
+		for () {
+			Boolean false
+		}
+	}
+
 }
