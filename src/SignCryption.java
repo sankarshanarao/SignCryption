@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class SignCryption {
     private BigInteger p, q, g, x, y, yo, shSc;
-    private String k,k1,k2;
+    private String k, k1, k2;
 
 	// // Constructors // // 
 
@@ -57,7 +57,7 @@ public class SignCryption {
 
 		y = g.modPow(x, p);
 
-    }
+	}
 
 	// Getters and Setters
 
@@ -86,6 +86,11 @@ public class SignCryption {
 
 		System.out.print("Sec:");
 		System.out.println(shSc);
+	}
+
+	public void makeK() {
+		String kMd5 = getMd5(shSc.toString());
+		System.out.println(kMd5);
 	}
 
 	// // // // // // // // Logic // // // // // // // //

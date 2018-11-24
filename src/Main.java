@@ -14,5 +14,9 @@ public class Main {
         aliceSide.calculateSharedSec();
 
         bobSide.calculateSharedSec();
+
+        aliceSide.makeK();
+
+        bobSide.makeK();
     }
 }
