@@ -5,16 +5,25 @@ import java.util.LinkedList;
 public class SignCryption {
     private BigInteger p, q, g, x, y;
 
+    public String getP() {
+        return p.toString();
+    }
+
+    public String getQ() {
+        return q.toString();
+    }
+
+    public String getG() {
+        return g.toString();
+    }
+
+    public String getY() {
+        return y.toString();
+    }
+
     public SignCryption() {
         p = new BigInteger("62496229288368844351282174568366209836365424367831"); // 50 digit long prime
         System.out.println("Prime setup");
-    }
-
-    public SignCryption(String qs, String gs) {
-        p = new BigInteger("62496229288368844351282174568366209836365424367831");
-        q = new BigInteger(qs);
-        g = new BigInteger(gs);
-        System.out.println("p, q, g setup");
 
         BigInteger t = p.subtract(BigInteger.ONE);
         LinkedList <BigInteger> l = rhoFactors(t);
@@ -27,9 +36,30 @@ public class SignCryption {
 
         System.out.println(indexOfFactor);
 
-        System.out.print(l.get(indexOfFactor));
+        q = l.get(l.size()-1);
+
+        System.out.print(q);
         System.out.println(","+l.size());
 
+        g = q.add(BigInteger.ONE);
+
+        g.add(BigInteger.ONE);
+
+        System.out.println(g);
+        System.out.println(q);
+
+        x = q.subtract(BigInteger.ONE);
+
+        y = g.modPow(x, p);
+
+        System.out.println(y);
+    }
+
+    public SignCryption(String qs, String gs) {
+        p = new BigInteger("62496229288368844351282174568366209836365424367831");
+        q = new BigInteger(qs);
+        g = new BigInteger(gs);
+        System.out.println("p, q, g setup");
     }
 
     private static Boolean isSpsp(BigInteger n, BigInteger a) {

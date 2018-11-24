@@ -1,6 +1,10 @@
 public class Main {
     public static void main(String []args) {
-        SignCryption t = new SignCryption("123", "4");
+        SignCryption aliceSide = new SignCryption();
         // System.out.println(t.hello());
+
+        System.out.println(aliceSide.getP());
+
+        SignCryption bobSide = new SignCryption(aliceSide.getQ(), aliceSide.getG());
     }
 }
