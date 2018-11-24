@@ -6,5 +6,13 @@ public class Main {
         System.out.println(aliceSide.getP());
 
         SignCryption bobSide = new SignCryption(aliceSide.getQ(), aliceSide.getG());
+
+        aliceSide.setYo(bobSide.getY());
+
+        bobSide.setYo(aliceSide.getY());
+
+        aliceSide.calculateSharedSec();
+
+        bobSide.calculateSharedSec();
     }
 }

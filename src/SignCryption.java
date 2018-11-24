@@ -3,7 +3,7 @@ import java.util.*;
 import java.util.LinkedList;
 
 public class SignCryption {
-    private BigInteger p, q, g, x, y, xo;
+    private BigInteger p, q, g, x, y, yo, shSc;
 
 	// // Constructors // // 
 
@@ -73,8 +73,15 @@ public class SignCryption {
         return y.toString();
     }
 
-	public void setXo(BigInteger Xo) {
-		xo = Xo.add(BigInteger.ZERO);
+	public void setYo(String Yo) {
+		yo = new BigInteger(Yo);
+	}
+
+	public void calculateSharedSec() {
+		shSc = yo.modPow(x, p);
+
+		System.out.print("Sec:");
+		System.out.println(shSc);
 	}
 
 	// // // // // // // // Logic // // // // // // // //
