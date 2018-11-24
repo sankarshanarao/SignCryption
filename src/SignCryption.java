@@ -3,23 +3,9 @@ import java.util.*;
 import java.util.LinkedList;
 
 public class SignCryption {
-    private BigInteger p, q, g, x, y;
+    private BigInteger p, q, g, x, y, xo;
 
-    public String getP() {
-        return p.toString();
-    }
-
-    public String getQ() {
-        return q.toString();
-    }
-
-    public String getG() {
-        return g.toString();
-    }
-
-    public String getY() {
-        return y.toString();
-    }
+	// // Constructors // // 
 
     public SignCryption() {
         p = new BigInteger("62496229288368844351282174568366209836365424367831"); // 50 digit long prime
@@ -60,7 +46,38 @@ public class SignCryption {
         q = new BigInteger(qs);
         g = new BigInteger(gs);
         System.out.println("p, q, g setup");
+
+		Random numb = new Random();
+
+		x = q.subtract(BigInteger.valueOf(numb.nextInt(10)));
+
+		y = g.modPow(x, p);
+
     }
+
+	// Getters and Setters
+
+	public String getP() {
+        return p.toString();
+    }
+
+    public String getQ() {
+        return q.toString();
+    }
+
+    public String getG() {
+        return g.toString();
+    }
+
+    public String getY() {
+        return y.toString();
+    }
+
+	public void setXo(BigInteger Xo) {
+		xo = Xo.add(BigInteger.ZERO);
+	}
+
+	// // // // // // // // Logic // // // // // // // //
 
     private static Boolean isSpsp(BigInteger n, BigInteger a) {
 		BigInteger two = BigInteger.valueOf(2);
@@ -169,17 +186,17 @@ public class SignCryption {
 		return fs;
 	}
 
-	public static BigInteger getGenerator(BigInteger primeNumber) {
-		if (isPrime(primeNumber)==false)
-			return -1;
+	// public static BigInteger getGenerator(BigInteger primeNumber) {
+	// 	if (isPrime(primeNumber)==false)
+	// 		return -1;
 
-		BigInteger phi = primeNumber-1;
+	// 	BigInteger phi = primeNumber-1;
 
-		LinkedList primeFactors = rhoFactors(phi);
-		/*Still Working on it*/
-		for () {
-			Boolean false
-		}
-	}
+	// 	LinkedList primeFactors = rhoFactors(phi);
+	// 	/*Still Working on it*/
+	// 	for () {
+	// 		Boolean false
+	// 	}
+	// }
 
 }
