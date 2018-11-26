@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class SignCryption {
     private BigInteger p, q, g, x, y, yo, shSc;
-    private String k, k1, k2;
+    private String k, k1, k2, c, r, message, keyHash;
 
 	// // Constructors // // 
 
@@ -91,6 +91,93 @@ public class SignCryption {
 	public void makeK() {
 		String kMd5 = getMd5(shSc.toString());
 		System.out.println(kMd5);
+		k1 = kMd5.substring(0, 16);
+		k2 = kMd5.substring(16, 32);
+		System.out.println(k1);
+		System.out.println(k2);
+	}
+
+	public void setCnR(String C, String R) {
+		c = "";
+		r = "";
+		c+=C;
+		r+=R;
+	}
+
+	public String getC() {
+		return c;
+	}
+
+	public void makeMessage() {
+
+	}
+
+
+
+	// ///////////////////
+	public static int digSum(int n) {
+		int sum=0; 
+
+		while(n>0 || sum>9) {
+			if(n==0) {
+				n = sum;
+				sum = 0;
+			}
+
+			sum += n%10;
+			n/=10;
+		}
+
+		return sum;
+	}
+
+	public static String Encrypt(String message,int digit)
+	{
+		String encrypt="";
+		for(int i=0;i<message.length();i++)
+		{
+			encrypt+=(char)((int)message.charAt(i)+digit);
+		}
+		return encrypt;
+	}
+
+	public static String Decrypt(String message,int digit)
+	{
+		String decrypt="";
+		for(int i=0;i<message.length();i++)
+		{
+			decrypt+=(char)((int)message.charAt(i)-digit);
+		}
+		return decrypt;
+	}
+	
+
+	public senderCreateC() {
+		String numOnly = k1.replaceAll("[^0-9]", "");
+
+		int sum = 0;
+
+		for(int i=0; i<numOnly.length(); i++) {
+			sum+= ((int)numOnly.charAt(i)-48);
+		}
+
+		int single_digit = digSum(sum);
+
+		c = Encrypt(message, single_digit);
+	}
+
+	public recvCreateC() {
+		String numOnly = k1.replaceAll("[^0-9]", "");
+
+		int sum = 0;
+
+		for(int i=0; i<numOnly.length(); i++) {
+			sum+= ((int)numOnly.charAt(i)-48);
+		}
+
+		int single_digit = digSum(sum);
+
+		message = Decrypt(message, single_digit);
 	}
 
 	// // // // // // // // Logic // // // // // // // //
